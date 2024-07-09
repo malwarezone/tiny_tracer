@@ -1,5 +1,5 @@
 os:
-  - Visual Studio 2015
+  - Visual Studio 2019
   
 platform: x64
   
@@ -32,6 +32,6 @@ environment:
     - env_arch: "x64"
 
 build_script:
-  - ps: $PlatformToolset = "v141"
+  - ps: $PlatformToolset = "v142"
   - ps: (Get-Content TinyTracer.vcxproj) | %{$_ -replace "v110", $PlatformToolset} | Set-Content TinyTracer.vcxproj
   - ps: msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
