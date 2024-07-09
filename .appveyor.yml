@@ -10,7 +10,7 @@ branches:
     - master
     
 environment:
-  projName: $(APPVEYOR_PROJECT_NAME)
+  projName: tinytracer
   clone_folder: c:\projects\%projName%
   buildPlatform: $(PLATFORM)
   artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
