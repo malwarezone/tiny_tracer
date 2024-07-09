@@ -35,3 +35,11 @@ build_script:
   - ps: $PlatformToolset = "v142"
   - ps: (Get-Content TinyTracer.vcxproj) | %{$_ -replace "v110", $PlatformToolset} | Set-Content TinyTracer.vcxproj
   - ps: msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
+  
+after_build:
+  - mkdir %artifactName%
+  - move_dlls.bat
+  - cp -r install32_64 %artifactName%
+  
+artifacts:
+  - path: %artifactName%
