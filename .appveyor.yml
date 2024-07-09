@@ -38,7 +38,7 @@ build_script:
   
 after_build:
   - mkdir C:\%artifactName%
-  - move_dlls.bat
+  - move x64\Release\TinyTracer.dll install32_64\TinyTracer64.dll
   - cp -r install32_64 C:\%artifactName%
   
 artifacts:
