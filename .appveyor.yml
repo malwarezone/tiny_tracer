@@ -40,5 +40,5 @@ after_build:
   - cp x64\Release\TinyTracer.dll install32_64\TinyTracer64.dll
   
 artifacts:
-  - path: install32_64
+  - path: x64
   
