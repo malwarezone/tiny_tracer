@@ -16,11 +16,10 @@ install:
   - 7z x pin.zip
   - dir
   - cd pin-3.30-98830-g1d7b601b3-msvc-windows
-  - dir
   - cd source
   - cd tools
-  - git clone https://github.com/hasherezade/tiny_tracer
-  - cd tiny_tracer
+  - cp -r ../../../tiny-tracer ./
+  - cd tiny-tracer
 
 build:
   verbosity: detailed
