@@ -25,6 +25,10 @@ install:
 build:
   verbosity: detailed
 
+environment:
+  buildConfig: $(CONFIGURATION)
+  buildPlatform: $(PLATFORM)
+
 configuration:
   - Release
     
