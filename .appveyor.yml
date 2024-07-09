@@ -11,7 +11,7 @@ branches:
     
 environment:
   buildPlatform: $(PLATFORM)
-  projName: $(APPVEYOR_PROJECT_NAME)
+  projName: $(APPVEYOR_REPO_NAME)
   artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
   
 install:
