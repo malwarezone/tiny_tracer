@@ -34,7 +34,6 @@ environment:
     - env_arch: "x64"
 
 build_script:
-  - ps: >-
-    $PlatformToolset = "v141"
-    (Get-Content TinyTracer.vcxproj) | %{$_ -replace "v110", $PlatformToolset} | Set-Content TinyTracer.vcxproj
-    & msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
+  - ps: $PlatformToolset = "v141"
+  - ps: (Get-Content TinyTracer.vcxproj) | %{$_ -replace "v110", $PlatformToolset} | Set-Content TinyTracer.vcxproj
+  - ps: msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
