@@ -10,8 +10,9 @@ branches:
     - master
     
 environment:
+  projName: $(APPVEYOR_PROJECT_NAME)
+  clone_folder: c:\projects\%projName%
   buildPlatform: $(PLATFORM)
-  projName: $(APPVEYOR_REPO_NAME)
   artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
   
 install:
