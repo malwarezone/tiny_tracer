@@ -8,10 +8,12 @@ platform:
 branches:
   only:
     - master
-    
+
+configuration:
+  - Release
+  
 environment:
-  projName: tinytracer
-  clone_folder: c:\projects\%projName%
+  projName: tiny-tracer
   buildPlatform: $(PLATFORM)
   artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
   
@@ -25,15 +27,10 @@ install:
   - cd source
   - cd tools
   - cp -r ../../../%projName% ./
-  - cd tiny-tracer
+  - cd %projName%
 
 build:
   verbosity: detailed
-
-
-
-configuration:
-  - Release
     
 build_script:
   - ps: $PlatformToolset = "v142"
