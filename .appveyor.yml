@@ -1,0 +1,42 @@
+os:
+  - Visual Studio 2015
+  
+platform: x64
+  
+branches:
+  only:
+    - master
+    
+install:
+  - cd ..
+  - dir
+  - curl -fsS -o pin.zip 'https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.30-98830-g1d7b601b3-msvc-windows.zip'
+  - 7z x pin.zip
+  - dir
+  - cd pin
+  - dir
+  - cd pin-3.30-98830-g1d7b601b3-msvc-windows
+  - dir
+  - cd source
+  - cd tools
+  - git clone https://github.com/hasherezade/tiny_tracer
+  - cd tiny_tracer
+
+build:
+  verbosity: detailed
+
+configuration:
+  - Release
+
+environment:
+  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(CONFIGURATION)
+  matrix:
+    - env_arch: "x64"
+
+build_script:
+  - ps: >-
+    if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015") {
+      $PlatformToolset = "v141"
+    }
+    (Get-Content TinyTracer.vcxproj) | %{$_ -replace "v110", $PlatformToolset} | Set-Content TinyTracer.vcxproj
+    & msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
