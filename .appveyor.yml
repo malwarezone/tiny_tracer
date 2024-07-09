@@ -42,5 +42,5 @@ after_build:
   - cp -r install32_64 C:\projects\tiny-tracer\%artifactName%
   
 artifacts:
-  - path: %artifactName%
+  - path: C:\projects\tiny-tracer\%artifactName%
   
