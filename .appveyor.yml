@@ -10,7 +10,7 @@ branches:
 install:
   - cd ..
   - dir
-  - ps: Start-FileDownload 'https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.30-98830-g1d7b601b3-msvc-windows.zip'
+  - appveyor DownloadFile 'https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.30-98830-g1d7b601b3-msvc-windows.zip'
   - move pin-3.30-98830-g1d7b601b3-msvc-windows.zip pin.zip
   - 7z x pin.zip
   - dir
