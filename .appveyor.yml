@@ -1,7 +1,9 @@
 os:
   - Visual Studio 2019
   
-platform: x64
+platform:
+  - x64
+  - x86
   
 branches:
   only:
@@ -25,11 +27,7 @@ build:
 
 configuration:
   - Release
-
-environment:
-  matrix:
-    - env_arch: "x64"
-
+    
 build_script:
   - ps: $PlatformToolset = "v142"
   - ps: (Get-Content TinyTracer.vcxproj) | %{$_ -replace "v110", $PlatformToolset} | Set-Content TinyTracer.vcxproj
@@ -37,8 +35,9 @@ build_script:
   
 after_build:
   - dir
-  - cp x64\Release\TinyTracer.dll C:\projects\tiny-tracer\install32_64\TinyTracer64.dll
-  
+  - if [%buildPlatform%]==[x64] ( cp x64\Release\TinyTracer.dll C:\projects\tiny-tracer\install32_64\TinyTracer64.dll )
+  - if [%buildPlatform%]==[x86] ( cp Release\TinyTracer.dll C:\projects\tiny-tracer\install32_64\TinyTracer32.dll )
+ 
 artifacts:
   - path: install32_64
   
