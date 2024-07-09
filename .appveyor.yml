@@ -35,8 +35,6 @@ environment:
 
 build_script:
   - ps: >-
-    if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015") {
-      $PlatformToolset = "v141"
-    }
+    if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015")  $PlatformToolset = "v141"
     (Get-Content TinyTracer.vcxproj) | %{$_ -replace "v110", $PlatformToolset} | Set-Content TinyTracer.vcxproj
     & msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
