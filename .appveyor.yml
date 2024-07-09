@@ -37,10 +37,10 @@ build_script:
   - ps: msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
   
 after_build:
-  - mkdir C:\%artifactName%
+  - mkdir C:\projects\tiny-tracer\%artifactName%
   - move x64\Release\TinyTracer.dll install32_64\TinyTracer64.dll
-  - cp -r install32_64 C:\%artifactName%
+  - cp -r install32_64 C:\projects\tiny-tracer\%artifactName%
   
 artifacts:
-  - path: C:\%artifactName%
+  - path: %artifactName%
   
