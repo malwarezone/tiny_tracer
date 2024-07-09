@@ -27,7 +27,6 @@ configuration:
   - Release
 
 environment:
-  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(CONFIGURATION)
   matrix:
     - env_arch: "x64"
 
@@ -37,9 +36,8 @@ build_script:
   - ps: msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
   
 after_build:
-  - mkdir C:\projects\tiny-tracer\%artifactName%
-  - move x64\Release\TinyTracer.dll install32_64\TinyTracer64.dll
-  - cp -r install32_64 C:\projects\tiny-tracer\%artifactName%
+  - dir
+  - cp x64\Release\TinyTracer.dll install32_64\TinyTracer64.dll
   
 artifacts:
   - path: install32_64
