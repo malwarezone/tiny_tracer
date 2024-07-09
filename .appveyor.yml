@@ -37,8 +37,8 @@ build_script:
   
 after_build:
   - dir
-  - cp x64\Release\TinyTracer.dll install32_64\TinyTracer64.dll
+  - cp x64\Release\TinyTracer.dll C:\projects\tiny-tracer\install32_64\TinyTracer64.dll
   
 artifacts:
-  - path: x64
+  - path: install32_64
   
