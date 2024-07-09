@@ -10,9 +10,7 @@ branches:
 install:
   - cd ..
   - dir
-  - ps: ([Net.ServicePointManager]::SecurityProtocol = 'Ssl3, Tls, Tls11, Tls12')
-  - ps: Start-FileDownload 'http://software.intel.com/sites/landingpage/pintool/downloads/pin-3.30-98830-g1d7b601b3-msvc-windows.zip'
-  - move pin-3.30-98830-g1d7b601b3-msvc-windows.zip pin.zip
+  - curl -fsS -o pin.zip https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.30-98830-g1d7b601b3-msvc-windows.zip
   - 7z x pin.zip
   - dir
   - cd pin
