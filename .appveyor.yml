@@ -27,6 +27,7 @@ build:
 environment:
   buildConfig: $(CONFIGURATION)
   buildPlatform: $(PLATFORM)
+  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
 
 configuration:
   - Release
@@ -37,10 +38,10 @@ build_script:
   - ps: msbuild TinyTracer.vcxproj "/p:platform=$env:platform;configuration=$env:configuration"
   
 after_build:
-  - dir
-  - if [%buildPlatform%]==[x64] ( cp x64\Release\TinyTracer.dll C:\projects\tiny-tracer\install32_64\TinyTracer64.dll )
-  - if [%buildPlatform%]==[x86] ( cp Release\TinyTracer.dll C:\projects\tiny-tracer\install32_64\TinyTracer32.dll )
+  - mkdir C:\projects\tiny-tracer\%artifactName%
+  - if [%buildPlatform%]==[x64] ( cp x64\Release\TinyTracer.dll C:\projects\tiny-tracer\%artifactName%\TinyTracer64.dll )
+  - if [%buildPlatform%]==[x86] ( cp Release\TinyTracer.dll C:\projects\tiny-tracer\%artifactName%\TinyTracer32.dll )
  
 artifacts:
-  - path: install32_64
+  - path: %artifactName%
   
