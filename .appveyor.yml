@@ -9,6 +9,11 @@ branches:
   only:
     - master
     
+environment:
+  buildPlatform: $(PLATFORM)
+  projName: $(APPVEYOR_PROJECT_NAME)
+  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
+  
 install:
   - cd ..
   - dir
@@ -18,15 +23,13 @@ install:
   - cd pin-3.30-98830-g1d7b601b3-msvc-windows
   - cd source
   - cd tools
-  - cp -r ../../../$(APPVEYOR_PROJECT_NAME) ./
+  - cp -r ../../../%projName% ./
   - cd tiny-tracer
 
 build:
   verbosity: detailed
 
-environment:
-  buildPlatform: $(PLATFORM)
-  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(PLATFORM)
+
 
 configuration:
   - Release
@@ -38,8 +41,8 @@ build_script:
   
 after_build:
   - mkdir C:\projects\tiny-tracer\install32_64\%artifactName%
-  - if [%buildPlatform%]==[x64] ( cp x64\Release\TinyTracer.dll C:\projects\$(APPVEYOR_PROJECT_NAME)\install32_64\%artifactName%\TinyTracer64.dll )
-  - if [%buildPlatform%]==[x86] ( cp Release\TinyTracer.dll C:\projects\$(APPVEYOR_PROJECT_NAME)\install32_64\%artifactName%\TinyTracer32.dll )
+  - if [%buildPlatform%]==[x64] ( cp x64\Release\TinyTracer.dll C:\projects\%projName%\install32_64\%artifactName%\TinyTracer64.dll )
+  - if [%buildPlatform%]==[x86] ( cp Release\TinyTracer.dll C:\projects\%projName%\install32_64\%artifactName%\TinyTracer32.dll )
  
 artifacts:
   - path: install32_64\%artifactName%
